@@ -12,7 +12,9 @@ trait UserFilter
         });
 
         $builder->when(request()->has('minAge') || request()->has('maxAge'), function($query) {
-            return $query->ageBetween(request()->minAge, request()->maxAge);
+            $minAge = request()->has('minAge') ? request()->minAge : 0;
+            $maxAge = request()->has('maxAge') ? request()->maxAge : 150;
+            return $query->ageBetween($minAge, $maxAge);
         });
 
         $builder->when(request()->has('name'), function($query) {
