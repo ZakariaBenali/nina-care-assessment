@@ -21,6 +21,12 @@ class UserFactory extends Factory
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
+            'job' => fake()->jobTitle(),
+            'age' => fake()->numberBetween(20, 50),
+            'location' => fake()->address(),
+            'marital_status' => fake()->randomElement( ['single', 'married', 'divorced', 'widowed']),
+            'gender' => fake()->randomElement(['male', 'female', 'other']),
+            'religion' => fake()->randomElement(['christian', 'muslim', 'jewish', 'other']),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
         ];
