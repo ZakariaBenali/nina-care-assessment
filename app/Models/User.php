@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Builder;
+
 
 class User extends Authenticatable
 {
@@ -52,5 +54,21 @@ class User extends Authenticatable
 
     public function posts():HasMany {
         return $this->hasMany(Post::class);
+    }
+
+    public function scopeOfGender(Builder $query, string $gender) {
+        $query->where('gender', $gender);
+    }
+
+    public function scopeAgeBetween(Builder $query, int $minAge, int $maxAge) {
+        $query->whereBetween('age', [$minAge, $maxAge]);
+    }
+
+    public function scopeNamed(Builder $query, string $name) {
+        $query->where('name','LIKE',"%$name%");
+    }
+
+    public function scopePostTile(Builder $query, string $keyword) {
+        $query->whereRelation('posts', 'title', 'LIKE', "%$keyword%");
     }
 }
