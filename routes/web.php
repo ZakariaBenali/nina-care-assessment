@@ -13,5 +13,5 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', [UserController::class, 'index'])->name('users.index');
+Route::view('/', "welcome")->name('index');
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
