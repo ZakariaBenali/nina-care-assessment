@@ -21,10 +21,6 @@ trait UserFilter
             return $query->named(request()->name);
         });
 
-        $builder->when(request()->has('name'), function($query) {
-            return $query->named(request()->name);
-        });
-
         $builder->when(request()->has('post_title'), function($query) {
             return $query->postTile(request()->post_title);
         });
