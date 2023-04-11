@@ -24,7 +24,8 @@ class User extends Authenticatable
         'job',
         'age',
         'location',
-        'marital_status'
+        'marital_status',
+        'gender'
     ];
 
     /**
