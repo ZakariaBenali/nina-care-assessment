@@ -2,31 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Filters\User\AgeFilter;
-use App\Filters\User\GenderFilter;
-use App\Filters\User\ReligionFilter;
-use \App\Filters\User\NameFilter;
-
-use App\Models\User;
-use Illuminate\Pipeline\Pipeline;
+use App\Actions\User\GetFilteredAction;
 
 class UserController extends Controller
 {
     /**
      * Display a listing of user.
      */
-    public function index()
+    public function index(GetFilteredAction $filteredAction)
     {
-        $users = app(Pipeline::class)
-                    ->send(User::query())
-                    ->through([
-                        NameFilter::class,
-                        GenderFilter::class,
-                        ReligionFilter::class,
-                        AgeFilter::class,
-                    ])
-                    ->thenReturn()
-                    ->get();
+        $users = $filteredAction->execute();
         return $users;
     }
 }
