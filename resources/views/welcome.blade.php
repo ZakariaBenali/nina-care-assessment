@@ -862,9 +862,9 @@
                     <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Example:</h2>
                     <x-route-link :link="route('users.index', ['name' => 'Kavo'])" />
                     <x-route-link :link="route('users.index', ['gender' => 'female'])" />
+                    <x-route-link :link="route('users.index', ['religion' => 'muslim'])" />
                     <x-route-link :link="route('users.index', ['minAge' => 40, 'maxAge' => 60])" />
-                    <x-route-link :link="route('users.index', ['post_title' => 'Seven'])" />
-                    <x-route-link :link="route('users.index', ['name' => 'Kavo', 'gender' => 'female', 'minAge' => 40, 'maxAge' => 60, 'post_title' => 'Seven'])" />
+                    <x-route-link :link="route('users.index', ['name' => 'Kavo', 'gender' => 'female', 'minAge' => 40, 'maxAge' => 60, 'religion' => 'christian'])" />
                 </div>
             </div>
 

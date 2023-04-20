@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Filters\User\AgeFilter;
+use App\Filters\User\GenderFilter;
+use App\Filters\User\ReligionFilter;
+use \App\Filters\User\NameFilter;
+
 use App\Models\User;
-use Illuminate\Http\Request;
+use Illuminate\Pipeline\Pipeline;
 
 class UserController extends Controller
 {
@@ -12,6 +17,16 @@ class UserController extends Controller
      */
     public function index()
     {
-        return User::filter()->with('posts')->get();
+        $users = app(Pipeline::class)
+                    ->send(User::query())
+                    ->through([
+                        NameFilter::class,
+                        GenderFilter::class,
+                        ReligionFilter::class,
+                        AgeFilter::class,
+                    ])
+                    ->thenReturn()
+                    ->get();
+        return $users;
     }
 }
